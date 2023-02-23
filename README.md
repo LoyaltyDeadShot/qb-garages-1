@@ -11,7 +11,7 @@ Almost everything is fully customizable to the last bit!
 
 ## Dependencies
  - [qb-radialmenu](https://github.com/qbcore-framework/qb-radialmenu)
- - [qb-core](https://github.com/qbcore-framework/qb-core)
+ - [Qbox](https://github.com/Qbox-project/)
  - [ox_lib](https://github.com/overextended/ox_lib/releases)
 
 ## Installation
