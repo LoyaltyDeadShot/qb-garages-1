@@ -49,7 +49,6 @@ RegisterNetEvent("qb-garage:server:AddTrunkItems", function(job, plate)
     trunkitems = Config.VehJobItems[job]
 	for k, item in pairs(trunkitems) do
         exports.ox_inventory:AddItem(invid, item.name, item.amount, item.slot)
-        print(plate, item.name, item.amount, item.slot)
     end
 end)
 

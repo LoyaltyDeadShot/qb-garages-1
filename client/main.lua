@@ -609,7 +609,6 @@ local function SpawnVehicleSpawnerVehicle(vehicleModel, location, heading, cb)
             local veh = NetToVeh(netId)
             SetVehicleNumberPlateText(veh, jobplate)
             UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
-            print(garage.job, jobplate, garage.TrunkItems)
             if garage.TrunkItems == true then
                 TriggerServerEvent("qb-garage:server:AddTrunkItems", garage.job, jobplate)
             end
