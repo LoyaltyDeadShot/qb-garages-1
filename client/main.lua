@@ -580,6 +580,7 @@ local function UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
     else
         exports['LegacyFuel']:SetFuel(veh, 100) -- Don't change this. Change it in the  Defaults to legacy fuel if not set in the config
     end
+    GetTrunkItems(PlayerData.job.name)
     TriggerEvent("vehiclekeys:client:SetOwner", plate)
     TriggerServerEvent("qb-garage:server:UpdateSpawnedVehicle", plate, true)
 
@@ -592,13 +593,13 @@ local function UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
     
     SetAsMissionEntity(veh)
     SetVehicleEngineOn(veh, true, true)
-
+    --        AddTrunkItems()
     if cb then cb(veh) end
 end
 
 local function SpawnVehicleSpawnerVehicle(vehicleModel, location, heading, cb)
     local garage = Config.Garages[CurrentGarage]
-    
+
     if garage.plateprefix == nil then
         jobplate = QBCore.Functions.GetPlate(veh)
     else
@@ -623,7 +624,6 @@ end
 function UpdateSpawnedVehicle(spawnedVehicle, vehicleInfo, heading, garage, properties)
     local plate = QBCore.Functions.GetPlate(spawnedVehicle)
     if garage.useVehicleSpawner then
-        GetTrunkItems(PlayerData.job.name)
         ClearMenu()
         if plate then
             OutsideVehicles[plate] = spawnedVehicle
@@ -636,9 +636,6 @@ function UpdateSpawnedVehicle(spawnedVehicle, vehicleInfo, heading, garage, prop
         end
         TriggerEvent("vehiclekeys:client:SetOwner", plate)
         TriggerServerEvent("qb-garage:server:UpdateSpawnedVehicle", plate, true)
-
-        --        AddTrunkItems()  WIP WORK OUT OXINVENTORY TRUNK STASH LOGIC
-
     else
         if plate then
             OutsideVehicles[plate] = spawnedVehicle
@@ -682,7 +679,7 @@ function GetTrunkItems(job)
 		}
 	end
 	Config.VehJobItems[job] = items
-    -- print(items)
+    print(items)
 end
 
 -- Events
@@ -743,7 +740,7 @@ RegisterNetEvent("qb-garages:client:GarageMenu", function(data)
                         }
                     }
                 else
-                    MenuGarageOptions[#MenuGarageOptions+1] = {
+                    MenuGarageOptions.options[#MenuGarageOptions.options+1] = {
                         title = Lang:t('menu.header.garage', {value = vname, value2 = v.plate}),
                         description = Lang:t('menu.text.garage', {value = v.state, value2 = currentFuel, value3 = enginePercent, value4 = bodyPercent}),
                         event = "qb-garages:client:TakeOutGarage",

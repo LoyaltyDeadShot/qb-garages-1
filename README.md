@@ -10,8 +10,8 @@ Almost everything is fully customizable to the last bit!
 **For screenshots scroll down**
 
 ## Dependencies
- - [qb-radialmenu](https://github.com/Qbox-project/qb-radialmenu)
- - [Qbox](https://github.com/Qbox-project/)
+ - [qb-radialmenu](https://github.com/qbcore-framework/qb-radialmenu)
+ - [qb-core](https://github.com/qbcore-framework/qb-core)
  - [ox_lib](https://github.com/overextended/ox_lib/releases)
 
 ## Installation
@@ -33,8 +33,6 @@ Drag 'n Drop replace for qb-garages.
 * Custom DrawText
 * Water Garages
 * Aircraft Garages
-* Plate Prefixes
-* Trunk Inventory Spawn
 
 ## Screenshots
 
