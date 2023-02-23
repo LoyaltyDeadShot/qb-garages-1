@@ -33,6 +33,8 @@ Drag 'n Drop replace for qb-garages.
 * Custom DrawText
 * Water Garages
 * Aircraft Garages
+* Plate Prefixes
+* Trunk Inventory Spawn
 
 ## Screenshots
 
