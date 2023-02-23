@@ -598,19 +598,19 @@ end
 
 local function SpawnVehicleSpawnerVehicle(vehicleModel, location, heading, cb)
     local garage = Config.Garages[CurrentGarage]
+    local PlayerData = QBCore.Functions.GetPlayerData()
     if garage.plateprefix == nil then
         jobplate = QBCore.Functions.GetPlate(veh)
     else
         jobplate = garage.plateprefix..tostring(math.random(1000, 9999))
     end
 
-    PlayerData = QBCore.Functions.GetPlayerData()
-    SetVehicleNumberPlateText(veh, jobplate)
-    SetJobVehItems(PlayerData.job.name)
     if Config.SpawnVehiclesServerside then
         QBCore.Functions.TriggerCallback('QBCore:Server:SpawnVehicle', function(netId)
             local veh = NetToVeh(netId)
             UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
+            SetVehicleNumberPlateText(veh, jobplate)
+            SetJobVehItems(PlayerData.job.name)
         end,vehicleModel, location, garage.WarpPlayerIntoVehicle ~= nil and garage.WarpPlayerIntoVehicle or Config.WarpPlayerIntoVehicle)
     else
         QBCore.Functions.SpawnVehicle(vehicleModel, function(veh)
