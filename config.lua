@@ -1,6 +1,5 @@
 Config = Config or {}
 --[[
-    Author: JDev17#8160
     TRANSLATION:
         To create a new translation file, copy an existing one and rename it to e.g. es (spanish), then translate it and change the imported file in the fxmanifest under shared_scripts.
     GARAGE CONFIGURATION EXAMPLE:
@@ -39,6 +38,7 @@ Config = Config or {}
         -- gang = {'vagos', 'gsf'}, -- optional, multi gang support
         jobVehiclesIndex = 'pd1', -- the corresponding index (JobVehicles)
         plateprefix = "SASP", -- Applies plate prefix when the vehicle spawner is used for job vehicles.
+        TrunkItems = true, -- if false or nil function is skipped.
         vehicleCategories = {'helicopter', 'plane'}, -- categories defined in VehicleCategories
         drawText = 'Hangar', -- the drawtext text, shown when entering the polyzone of that garage
         ParkingDistance = 10.0 -- Optional ParkingDistance, to override the global ParkingDistance
@@ -163,42 +163,51 @@ Config.VehJobItems = {
 		[1] = {
 			name = 'heavyarmor',
 			amount = 2,
+            slot = 1,
 		},
 		[2] = {
 			name = 'empty_evidence_bag',
 			amount = 10,
+            slot = 2,
 		},
 		[3] = {
 			name = 'police_stormram',
 			amount = 1,
+            slot = 3,
 		},
 	},
 	['mechanic'] = {
 		[1] = {
 			name = 'repairkit',
 			amount = 10,
+            slot = 1,
 		},
 		[2] = {
 			name = 'advancedrepairkit',
 			amount = 2,
+            slot = 2,
 		},
 		[3] = {
 			name = 'cleaningkit',
 			amount = 10,
+            slot = 3,
 		},
 	},
 	['ambulance'] = {
 		[1] = {
 			name = 'bandage',
 			amount = 10,
+            slot = 1,
 		},
 		[2] = {
 			name = 'firstaid',
 			amount = 2,
+            slot = 2,
 		},
 		[3] = {
 			name = 'painkillers',
 			amount = 10,
+            slot = 3,
 		},
 	}
 }
@@ -1660,6 +1669,7 @@ Config.Garages = {
         job = "police",
         useVehicleSpawner = true,
         jobGarageIdentifier = 'pd1',
+        TrunkItems = true,
         plateprefix = "SASP",
         vehicleCategories = {'emergency'},
         drawText = 'Parking',

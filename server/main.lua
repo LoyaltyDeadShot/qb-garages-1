@@ -41,6 +41,18 @@ RegisterNetEvent("qb-garage:server:UpdateSpawnedVehicle", function(plate, value)
     VehicleSpawnerVehicles[plate] = value
 end)
 
+RegisterNetEvent("qb-garage:server:AddTrunkItems", function(job, plate)
+    invid = 'trunk'..plate
+    invlabel = 'Job Trunk'
+    exports.ox_inventory:RegisterStash(invid, invlabel, 40, 20000)
+    Wait(100)
+    trunkitems = Config.VehJobItems[job]
+	for k, item in pairs(trunkitems) do
+        exports.ox_inventory:AddItem(invid, item.name, item.amount, item.slot)
+        print(plate, item.name, item.amount, item.slot)
+    end
+end)
+
 QBCore.Functions.CreateCallback('qb-garage:server:spawnvehicle', function (source, cb, vehInfo, coords, warp)
     local veh = QBCore.Functions.SpawnVehicle(source, vehInfo.vehicle, coords, warp)
     

@@ -603,12 +603,16 @@ local function SpawnVehicleSpawnerVehicle(vehicleModel, location, heading, cb)
     else
         jobplate = garage.plateprefix..tostring(math.random(1000, 9999))
     end
-
+    
     if Config.SpawnVehiclesServerside then
         QBCore.Functions.TriggerCallback('QBCore:Server:SpawnVehicle', function(netId)
             local veh = NetToVeh(netId)
             SetVehicleNumberPlateText(veh, jobplate)
             UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
+            print(garage.job, jobplate, garage.TrunkItems)
+            if garage.TrunkItems == true then
+                TriggerServerEvent("qb-garage:server:AddTrunkItems", garage.job, jobplate)
+            end
         end,vehicleModel, location, garage.WarpPlayerIntoVehicle ~= nil and garage.WarpPlayerIntoVehicle or Config.WarpPlayerIntoVehicle)
     else
         QBCore.Functions.SpawnVehicle(vehicleModel, function(veh)
