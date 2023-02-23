@@ -38,6 +38,7 @@ Config = Config or {}
         gang = 'vagos', -- optional, same as job but for gangs, do not use both
         -- gang = {'vagos', 'gsf'}, -- optional, multi gang support
         jobVehiclesIndex = 'pd1', -- the corresponding index (JobVehicles)
+        plateprefix = "SASP", -- Applies plate prefix when the vehicle spawner is used for job vehicles.
         vehicleCategories = {'helicopter', 'plane'}, -- categories defined in VehicleCategories
         drawText = 'Hangar', -- the drawtext text, shown when entering the polyzone of that garage
         ParkingDistance = 10.0 -- Optional ParkingDistance, to override the global ParkingDistance
@@ -154,6 +155,79 @@ Config.JobVehicles = {
             }
         }
     }
+}
+
+--Items are available in the trunk of the vehicle for industries in the vehicle system for work:
+Config.VehJobItems = {
+    ['police'] = {
+		[1] = {
+			name = 'heavyarmor',
+			amount = 2,
+			info = {},
+			type = 'item',
+			slot = 1,
+		},
+		[2] = {
+			name = 'empty_evidence_bag',
+			amount = 10,
+			info = {},
+			type = 'item',
+			slot = 2,
+		},
+		[3] = {
+			name = 'police_stormram',
+			amount = 1,
+			info = {},
+			type = 'item',
+			slot = 3,
+		},
+	},
+	['mechanic'] = {
+		[1] = {
+			name = 'repairkit',
+			amount = 10,
+			info = {},
+			type = 'item',
+			slot = 1,
+		},
+		[2] = {
+			name = 'advancedrepairkit',
+			amount = 2,
+			info = {},
+			type = 'item',
+			slot = 2,
+		},
+		[3] = {
+			name = 'cleaningkit',
+			amount = 10,
+			info = {},
+			type = 'item',
+			slot = 3,
+		},
+	},
+	['ambulance'] = {
+		[1] = {
+			name = 'bandage',
+			amount = 10,
+			info = {},
+			type = 'item',
+			slot = 1,
+		},
+		[2] = {
+			name = 'firstaid',
+			amount = 2,
+			info = {},
+			type = 'item',
+			slot = 2,
+		},
+		[3] = {
+			name = 'painkillers',
+			amount = 10,
+			info = {},
+			type = 'item',
+			slot = 3,
+		},
+	}
 }
 
 -- '/restorelostcars <destination_garage>' allows you to restore cars that have been parked in garages which no longer exist in the config (garage renamed or removed). The restored cars get sent to the destination garage or if left empty to a random garage in the list.
@@ -1613,6 +1687,7 @@ Config.Garages = {
         job = "police",
         useVehicleSpawner = true,
         jobGarageIdentifier = 'pd1',
+        plateprefix = "SASP"
         vehicleCategories = {'emergency'},
         drawText = 'Parking',
         ["ParkingSpots"] = {
