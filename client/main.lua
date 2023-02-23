@@ -580,7 +580,6 @@ local function UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
     else
         exports['LegacyFuel']:SetFuel(veh, 100) -- Don't change this. Change it in the  Defaults to legacy fuel if not set in the config
     end
-    GetTrunkItems(PlayerData.job.name)
     TriggerEvent("vehiclekeys:client:SetOwner", plate)
     TriggerServerEvent("qb-garage:server:UpdateSpawnedVehicle", plate, true)
 
@@ -593,7 +592,6 @@ local function UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
     
     SetAsMissionEntity(veh)
     SetVehicleEngineOn(veh, true, true)
-    --        AddTrunkItems()
     if cb then cb(veh) end
 end
 
@@ -658,28 +656,6 @@ function UpdateSpawnedVehicle(spawnedVehicle, vehicleInfo, heading, garage, prop
     if SpawnWithEngineRunning then
         SetVehicleEngineOn(veh, true, true)
     end
-end
-
-function GetTrunkItems(job)
-    local items = {}
-	for k, item in pairs(Config.VehJobItems[job]) do
-		local itemInfo = QBCore.Shared.Items[item.name:lower()]
-		items[item.slot] = {
-			name = itemInfo['name'],
-			amount = tonumber(item.amount),
-			info = item.info,
-			label = itemInfo['label'],
-			description = itemInfo['description'] and itemInfo['description'] or '',
-			weight = itemInfo['weight'],
-			type = itemInfo['type'],
-			unique = itemInfo['unique'],
-			useable = itemInfo['useable'],
-			image = itemInfo['image'],
-			slot = item.slot,
-		}
-	end
-	Config.VehJobItems[job] = items
-    print(items)
 end
 
 -- Events
