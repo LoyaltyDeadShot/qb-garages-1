@@ -61,7 +61,7 @@ Config.SharedHouseGarage = true -- Allow shared house garages, if false, the pla
 
 -- NEW ---
 Config.AllowParkingAnyonesVehicle = false -- Allow anyones vehicle to be stored in the garage, if false, only vehicles you own can be stored in the garage (supports only public garages)
-Config.AllowParkingFromOutsideVehicle = true -- Allow parking from outside the vehicle, if false, you have to be inside the vehicle to park it
+Config.AllowParkingFromOutsideVehicle = false -- Allow parking from outside the vehicle, if false, you have to be inside the vehicle to park it
 Config.VehicleParkDistance = 2.0 -- Distance from the player to the vehicle to park it, radial option will dissapear beyond this distance
 -- NEW --
 
@@ -163,69 +163,42 @@ Config.VehJobItems = {
 		[1] = {
 			name = 'heavyarmor',
 			amount = 2,
-			info = {},
-			type = 'item',
-			slot = 1,
 		},
 		[2] = {
 			name = 'empty_evidence_bag',
 			amount = 10,
-			info = {},
-			type = 'item',
-			slot = 2,
 		},
 		[3] = {
 			name = 'police_stormram',
 			amount = 1,
-			info = {},
-			type = 'item',
-			slot = 3,
 		},
 	},
 	['mechanic'] = {
 		[1] = {
 			name = 'repairkit',
 			amount = 10,
-			info = {},
-			type = 'item',
-			slot = 1,
 		},
 		[2] = {
 			name = 'advancedrepairkit',
 			amount = 2,
-			info = {},
-			type = 'item',
-			slot = 2,
 		},
 		[3] = {
 			name = 'cleaningkit',
 			amount = 10,
-			info = {},
-			type = 'item',
-			slot = 3,
 		},
 	},
 	['ambulance'] = {
 		[1] = {
 			name = 'bandage',
 			amount = 10,
-			info = {},
-			type = 'item',
-			slot = 1,
 		},
 		[2] = {
 			name = 'firstaid',
 			amount = 2,
-			info = {},
-			type = 'item',
-			slot = 2,
 		},
 		[3] = {
 			name = 'painkillers',
 			amount = 10,
-			info = {},
-			type = 'item',
-			slot = 3,
 		},
 	}
 }

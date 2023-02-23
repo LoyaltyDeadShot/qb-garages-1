@@ -598,7 +598,7 @@ end
 
 local function SpawnVehicleSpawnerVehicle(vehicleModel, location, heading, cb)
     local garage = Config.Garages[CurrentGarage]
-    local PlayerData = QBCore.Functions.GetPlayerData()
+    
     if garage.plateprefix == nil then
         jobplate = QBCore.Functions.GetPlate(veh)
     else
@@ -608,41 +608,22 @@ local function SpawnVehicleSpawnerVehicle(vehicleModel, location, heading, cb)
     if Config.SpawnVehiclesServerside then
         QBCore.Functions.TriggerCallback('QBCore:Server:SpawnVehicle', function(netId)
             local veh = NetToVeh(netId)
-            UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
             SetVehicleNumberPlateText(veh, jobplate)
-            SetJobVehItems(PlayerData.job.name)
+            UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
         end,vehicleModel, location, garage.WarpPlayerIntoVehicle ~= nil and garage.WarpPlayerIntoVehicle or Config.WarpPlayerIntoVehicle)
     else
         QBCore.Functions.SpawnVehicle(vehicleModel, function(veh)
+            SetVehicleNumberPlateText(veh, jobplate)
             UpdateVehicleSpawnerSpawnedVehicle(veh, garage, heading, cb)
         end, location, garage.WarpPlayerIntoVehicle ~= nil and garage.WarpPlayerIntoVehicle or Config.WarpPlayerIntoVehicle)
     end
-end
-
-function SetJobVehItems(job) -- Set trunk item for job vehicle
-	local items = {}
-	for k, item in pairs(Config.VehJobItems[job]) do
-		local itemInfo = QBCore.Shared.Items[item.name:lower()]
-		items[item.slot] = {
-			name = itemInfo['name'],
-			amount = tonumber(item.amount),
-			info = item.info,
-			label = itemInfo['label'],
-			description = itemInfo['description'] and itemInfo['description'] or '',
-			weight = itemInfo['weight'],
-			type = itemInfo['type'],
-			unique = itemInfo['unique'],
-			useable = itemInfo['useable'],
-			image = itemInfo['image'],
-			slot = item.slot,
-		}
-	end
-	Config.VehJobItems[job] = items
+    
 end
 
 function UpdateSpawnedVehicle(spawnedVehicle, vehicleInfo, heading, garage, properties)
     local plate = QBCore.Functions.GetPlate(spawnedVehicle)
     if garage.useVehicleSpawner then
+        GetTrunkItems(PlayerData.job.name)
         ClearMenu()
         if plate then
             OutsideVehicles[plate] = spawnedVehicle
@@ -655,6 +636,9 @@ function UpdateSpawnedVehicle(spawnedVehicle, vehicleInfo, heading, garage, prop
         end
         TriggerEvent("vehiclekeys:client:SetOwner", plate)
         TriggerServerEvent("qb-garage:server:UpdateSpawnedVehicle", plate, true)
+
+        --        AddTrunkItems()  WIP WORK OUT OXINVENTORY TRUNK STASH LOGIC
+
     else
         if plate then
             OutsideVehicles[plate] = spawnedVehicle
@@ -677,6 +661,28 @@ function UpdateSpawnedVehicle(spawnedVehicle, vehicleInfo, heading, garage, prop
     if SpawnWithEngineRunning then
         SetVehicleEngineOn(veh, true, true)
     end
+end
+
+function GetTrunkItems(job)
+    local items = {}
+	for k, item in pairs(Config.VehJobItems[job]) do
+		local itemInfo = QBCore.Shared.Items[item.name:lower()]
+		items[item.slot] = {
+			name = itemInfo['name'],
+			amount = tonumber(item.amount),
+			info = item.info,
+			label = itemInfo['label'],
+			description = itemInfo['description'] and itemInfo['description'] or '',
+			weight = itemInfo['weight'],
+			type = itemInfo['type'],
+			unique = itemInfo['unique'],
+			useable = itemInfo['useable'],
+			image = itemInfo['image'],
+			slot = item.slot,
+		}
+	end
+	Config.VehJobItems[job] = items
+    -- print(items)
 end
 
 -- Events
